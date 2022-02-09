@@ -5,6 +5,7 @@ import com.example.Users.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -12,6 +13,10 @@ public class UserService {
     private UserRepository repository;
 
     public User saveUser(User user){
+        Optional<User> UserOptional =  repository.findUserByEMail(user.getEmail());
+        if (UserOptional.isPresent()){
+            throw new IllegalStateException("Error: This email is already taken!");
+        }
         return repository.save(user);
     }
 

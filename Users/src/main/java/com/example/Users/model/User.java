@@ -43,6 +43,11 @@ public class User {
         this.deptnumber = deptnumber;
     }
 
+    public User(Long id, String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+
     public Long getId() {
         return id;
     }
