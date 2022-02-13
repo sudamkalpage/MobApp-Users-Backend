@@ -33,6 +33,11 @@ public class UserService {
     }
 
     public String deleteUser(Long id){
+        Optional<User> UserOptional = repository.findById(id);
+        if (UserOptional.isEmpty()){
+            throw new IllegalStateException("Error: User with Id-"+id+" does not exists.");
+        }
+
         repository.deleteById(id);
         return "User with id : "+id+" successfully removed!";
     }
