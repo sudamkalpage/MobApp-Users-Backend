@@ -6,6 +6,7 @@ import com.example.Users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -32,9 +33,19 @@ public class UserController {
         return service.getUserById(id);
     }
 
-    @PutMapping("/update")
-    public User updateUser(@org.springframework.web.bind.annotation.RequestBody User user){
-        return service.updateUser(user);
+    @PutMapping(path="/update/{userID}")
+    public User updateUser(@PathVariable("userID") Long id,
+                           @RequestParam(required = false) String firstname,
+                           @RequestParam(required = false) String lastname,
+                           @RequestParam(required = false) LocalDate dob,
+                           @RequestParam(required = false) String address,
+                           @RequestParam(required = false) String gender,
+                           @RequestParam(required = false) String email,
+                           @RequestParam(required = false) long phone,
+                           @RequestParam(required = false) LocalDate joineddate,
+                           @RequestParam(required = false) Integer deptnumber
+                           ){
+        return service.updateUser(id, firstname, lastname, dob, address, gender, email, phone, joineddate, deptnumber);
     }
 
     @DeleteMapping("delete/{id}")
