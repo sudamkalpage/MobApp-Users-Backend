@@ -29,6 +29,10 @@ public class UserService {
     }
 
     public User getUserById(Long id){
+        Optional<User> UserOptional = repository.findById(id);
+        if (UserOptional.isEmpty()){
+            throw new IllegalStateException("Error: User with Id-"+id+" does not exists.");
+        }
         return repository.findById(id).orElse(null);
     }
 
